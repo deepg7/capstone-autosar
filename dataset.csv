@@ -1,0 +1,573 @@
+﻿Class,Requirement
+BSW,BSW Modules shall support link-time configuration
+BSW,BSW Modules shall support post-build configuration
+BSW,BSW Modules shall support multiple configuration sets
+BSW,BSW Modules shall support pre-compile configuration
+BSW,All modules of the AUTOSAR Basic Software shall support a tool based configuration
+BSW,All AUTOSAR Basic Software Modules shall provide configuration rules and constraints to enable plausibility checks
+BSW,Optional functionality of a Basic-SW component that is not required in the ECU shall be configurable at pre-compile-time
+BSW,"The AUTOSAR SW Components shall provide information about their dependency from faults, signal qualities, driver demands"
+BSW,Configuration parameters being stored in memory shall be placed into separate c-files
+BSW,If a pre-compile time configuration parameter is implemented as “const“ it should be placed into a separate c-file
+BSW,The pre-compile time parameters shall be placed into a separate configuration header file
+BSW,References to c-configuration parameters shall be placed into a separate h-file
+BSW,The Basic Software Module specifications shall specify which other configuration files from other modules they use at least in the description
+BSW,The Basic Software Module specifications shall specify at least in the description which other modules they require
+BSW,Containers shall be used to group configuration parameters that are defined for the same object
+BSW,Containers shall have names
+BSW,Parameter content shall be unique within the module
+BSW,Parameters shall have a type
+BSW,Parameters shall have a range
+BSW,The Basic Software Module specifications shall specify the scope of the configuration parameters
+BSW,The Basic Software Module specifications shall list all configuration parameter dependencies
+BSW,The Basic Software Module specifications shall specify the supported configuration classes for changing values and multiplicities for each parameter/container
+BSW,The Basic Software Module specifications shall specify for each parameter/container whether it supports different values or multiplicity in different configuration sets
+BSW,The configuration parameters in pre-compile time are fixed before compilation starts
+BSW,The link-time configuration is achieved on object code basis in the stage after compiling and before linking
+BSW,Parameter-sets shall be located in a separate segment and shall be loaded after the code
+BSW,Parameter shall be selected from multiple sets of parameters after code has been loaded and started
+BSW,Configuration data shall be defined in a structure
+BSW,Each module shall provide version information
+BSW,Basic Software Modules shall report wake-up reasons
+BSW,The Basic Software Module shall be able to initialize variables and hardware in a separate initialization function
+BSW,The sequence of modules to be initialized shall be configurable
+BSW,A static status variable denoting if a BSW module is initialized shall be initialized with value 0 before any APIs of the BSW module is called
+BSW,The init / deinit services shall only be called by BswM or EcuM
+BSW,Memory mapping shall provide the possibility to define RAM segments which are not to be initialized during startup
+BSW,SW components shall be tested by a function defined in a common API in the Basis-SW
+BSW,Each BSW module shall provide a function to read out the version information of a dedicated module implementation
+BSW,BSW modules with AUTOSAR interfaces shall be describable with the means of the SW-C Template
+BSW,BSW module main processing functions shall not be allowed to enter a wait state
+BSW,The BSW module description template shall provide means to model the defined trigger conditions of schedulable objects
+BSW,BSW Modules shall ensure data consistency of data which is shared between BSW modules
+BSW,ISR functions shall be defined and documented in the BSW module description template
+BSW,A BSW module shall state if its main processing function(s) has to be executed in a specific order or sequence
+BSW,Access to OS is restricted
+BSW,Modules should have separate main processing functions for read/receive and write/transmit data path
+BSW,Main processing functions are only allowed to be called from task bodies provided by the BSW Scheduler
+BSW,A Main function of a un-initialized module shall return immediately
+BSW,Modules called by generic modules shall satisfy all interfaces requested by the generic module
+BSW,Hardware registers shall be protected if concurrent access to these registers occur
+BSW,Basic Software Modules which require a periodic main function shall allow to configure the period time between ] 0 .. INF[ seconds.
+BSW,Basic SW module shall be able to shutdown
+BSW,All AUTOSAR Basic Software Modules shall not return specific development error codes via the API
+BSW,Reporting of production relevant error statu
+BSW,Pre-de-bouncing of error status information is done within the DEM
+BSW,Software which is not part of the SW-C shall report error events only after the DEM is fully operational.
+BSW,All AUTOSAR Basic Software Modules shall check passed API parameters for validity
+BSW,All Basic SW Modules shall perform a pre-processor check of the versions of all imported include files
+BSW,All production code error ID symbols are defined by the Dem module and shall be retrieved by the other BSW modules from Dem configuration
+BSW,"The BSW shall document all production errors, extended production errors, development errors and runtime errors which are supported by the BSW module."
+BSW,The BSW shall specify the configuration for detecting an error. This configuration shall describe criteria and limits how the error is detected and possibly reset. This is applicable for production code errors as well as for development errors.
+BSW,"The detection of production errors and extended production errors shall distinguish between fault detection, failure free detection, and undecided state. Only detected faults and explicitly failure free detected states shall be reported."
+BSW,"Production errors shall be able to heal, if a problem no longer persists."
+BSW,"State information are detected either by the change of the state or when checked (event-based or cyclic). Checks shall be executed as often as possible, at least once per related monitoring cycle (e.g. OBD driving cycle for emission relevant systems), or as often as required by applicable regulations, to the extend feasible."
+BSW,"Some production errors detect the same root cause as failure. To avoid duplicate error reports to the garage, detection of one error shall be disabled in case of the the other error, by a appropriate configuration of the FiM. Hence, the production error shall only be enabled when a permission is granted."
+RTE,The RTE generator shall provide an API to indicate to the RTE that a partition needs to be restarted. This API should restore an initial RTE environment for the partition and re-activate communication with this partition.
+RTE,The RTE generator shall provide an API to indicate to the RTE that a partition will be terminated or restarted.
+RTE,"When two SWCs communicate, if one SWC is on a terminated partition (i.e., a partition being restarted), it should behave for the initiating SWC as if it was mapped on a shutdown remote ECU (i.e., an ECU being restarted). The RTE may provide the feedback with a timeout error immediately."
+RTE,"When a partition is terminated or restarting, the RTE shall ensure that RTE Events will not activate Runnable Entities of the terminated or restarting OS-Application. The RTE may use OS means to implement this requirement."
+RTE,The RTE Generator shall create exactly one software module header file to be explicitly included in each C/C++ application or basic software component type that defines that component’s RTE API. There may be a hierarchy of include files implicitly included.
+RTE,"On multi-core systems, the APIs to enter and exit exclusive areas shall ensure that not two entities may run inside the same exclusive area at any one time, neither by preemption nor by parallel execution of multiple entities on different cores."
+RTE,The RTE shall provide an API to read a system constant value. This API shall be usable for the C-preprocessor code or the C-compiler code.
+RTE,The RTE shall support the generation of an API to retrieve the transmission acknowledgement in an implicit communication.
+RTE,"For explicit sender-receiver communication, when configured, the RTE generator shall provide an API returning the value of a primitive Data Element directly in the C-language return statement of the API."
+RTE,"The SW-C and basic software module source codes shall be independent from the actual calibration method (data emulation with SW or HW support) chosen for the needed calibration parameters. To abstract from the different access methods to calibration parameters, the RTE and SchM shall provide an API."
+RTE,The RTE Generator shall support generating an RTE with unconnected R-Ports. The strict checking of unconnected R-Ports shall be supported via configuration as well.
+RTE,"The RTE generator shall provide null API calls for data elements or operations for ports where more elements/operations are provided than required. The API for an unconnected provided data element or operation shall discard the input parameters and return ""no error""."
+RTE,The RTE API shall support independent access to data items (sender-receiver interface) or operations (client-server interface).
+RTE,"The RTE shall communicate application-level errors on the same path as structural errors of the communication stack. Additionally, the RTE shall receive error information from the server operation’s return value."
+RTE,The RTE shall pass the application error ID together with the communication reply from the server to the client. The RTE shall only pass the application error if no structural error is present.
+RTE,"The RTE shall handle errors related to communication or resources. Specifically, the RTE is required to handle communication errors (e.g., message transmission failed) and resource errors (e.g., network not available), and to notify the relevant software component through the RTE API."
+RTE,The RTE generator shall support Transmission Acknowledgement for outgoing communication.
+RTE,"The RTE shall support the invalidation of Data Elements. It shall provide an API to invalidate a Data Element and to query if a Data Element has been invalidated. Additionally, notification upon the reception of an invalid Data Element shall be supported."
+RTE,"The RTE shall support the notification of time-outs on cyclically received signals/signal-groups via COM. Deadline monitoring has to be enabled for these signals, and the callback has to be configured in COM. This is only applicable for sender-receiver communication with info-type ""data""."
+RTE,"The RTE generator shall support the FILTER attribute. If specified, the attribute value shall specify the filter type used. Additionally, the RTE generator shall support different filter specifications for each data item in an AUTOSAR interface. Furthermore, the RTE generator shall ensure that value-based filtering is available for all receivers whether communication occurs via COM or is handled by the RTE."
+RTE,"The RTE generator shall support the CLIENT_MODE attribute with the values ""synchronous"" and ""asynchronous"". Additionally, the RTE generator shall support different client mode specifications for each operation in an AUTOSAR interface."
+RTE,"The RTE generator shall support the BUFFERING attribute with the values ""last_is_best"" (sender/receiver only), ""queue"", and ""no"" (client/server only). Additionally, the RTE generator shall support different buffering specifications for each data item in an AUTOSAR interface. Note that queues may be implemented by either the RTE or by COM."
+RTE,"The RTE generator shall support the RECEIVE_MODE attribute with the values ""data_read_access"", ""wake_up_of_wait_point"", and ""activation_of_runnable_entity"". Additionally, the RTE generator shall support different receive modes for each data item in an AUTOSAR interface."
+RTE,"The RTE generator shall support the INIT_VALUE attribute for both intra-ECU and inter-ECU communication (though the latter is expected to require no direct support if AUTOSAR COM is used). If an initial value is specified for a receiver and not as sender (or vice versa), the RTE generator shall apply the same initial value to both sender and receiver. If an initial value is specified for both sender and receiver, the RTE generator shall use the specifications for the receiver."
+RTE,"The RTE generator shall support the INFORMATION_TYPE attribute with values ""data"" and ""event"". Additionally, the RTE generator shall support different information types for each data item in an AUTOSAR interface. Furthermore, the RTE generator shall raise a configuration-time error if the specification of INFORMATION_TYPE is inconsistent for sender and receiver."
+RTE,The RTE generator shall generate an API in the application header file through which the Runnable Entities of a component instance can access their per-instance memory for reading and writing.
+RTE,The RTE shall provide an API to access the data consistency mechanism(s).
+RTE,"The RTE API shall pass 'in/out' and ""out"" formal parameters by reference."
+RTE,"The RTE API shall pass all input parameters that are composite data types (i.e., a record or an array) or strings by reference."
+RTE,An API input parameter that is a primitive data type (with the exception of a string) shall be passed by value.
+RTE,"For parameters which are typed by an AUTOSAR data type, the RTE API shall either use data types related to the whole AUTOSAR data type or data types related to the used BaseType. The kind of API is defined in the SWC-Description and is part of the contract phase input."
+RTE,The RTE API (for a particular programming language) shall be compiler and platform independent.
+RTE,The RTE shall support the execution of initialization runnable entities as part of the startup sequence controlled by the Bsw Manager and delay the start of timing events until the end of the startup sequence.
+RTE,The RTE generator shall respect the invocation order of Runnable Entities as specified in the input information.
+RTE,The 'trace' builds of the RTE generator shall support the tracing of client-server communication. The RTE should provide means for the tracing of transported signals of client-server communication. It should be possible to trace both intra-ECU and inter-ECU communication.
+RTE,The 'trace' builds of the RTE generator shall support tracing of sender-receiver signals on the VFB (Virtual Function Bus). The RTE should provide means for the tracing of transported signals of sender-receiver communication. It should be possible to trace both intra-ECU and inter-ECU communication.
+RTE,The RTE Generator shall be able to support multiple trace clients for the same trace event.
+RTE,"If the RTE is configured for tracing communication across the VFB (Virtual Function Bus), it shall be possible to detail the configuration of the RTE for what has to be logged and traced."
+RTE,"In the 'trace' build, the RTE implementations shall provide a standardized interface to make data values and events available to VFB tracing tools. Additionally, when in the 'trace' build, the RTE generator inserts hook calls at interesting points (e.g., API invocation, interactions with COM, task start, RunnableEntity start, etc.)."
+RTE,"If the RTE provides means for tracing which cost additional RAM and/or ROM and/or runtime in the ECU, it shall be possible to switch these features off statically during RTE generation."
+RTE,The RTE shall provide size indications of variable-size arrays to SWCs.
+RTE,"The RTE shall execute data transformation for SWC/BSW communication for Senders, Receivers, and Sender/Receiver intra-ECU communication."
+RTE,The RTE shall provide transformation errors to the SWC to enable them to react accordingly to errors.
+RTE,The RTE shall provide the buffer for the data transformation.
+RTE,"The RTE shall execute transformer chains for SWC communication for Senders, Receivers, Servers, and Clients of Sender/Receiver and Client/Server inter-ECU communication."
+RTE,The RP interface documentation shall describe the elements of the RP memory interface provided by the RTE and their relationship to the bypassed SWCs and service points.
+RTE,The RTE generator shall support manually inserted service points within SWCs.
+RTE,The RTE shall support the generation of service points.
+RTE,The RTE generator shall support disabling the execution of runnable entities.
+RTE,The RP memory interface provided by the RTE shall support the enabling or disabling of bypass functionality.
+RTE,The RTE shall support a write-read access pattern for RP prepared data.
+RTE,The RTE shall support selectable data preparation for RP.
+RTE,"The RTE shall provide support for the implementation of software component bypass. A bypass consists in reading, modifying, or writing data for testing or rapid prototyping purposes."
+RTE,It is possible to request the activation of one Executable Entity by several Events. It shall be possible to identify the activating Event during the execution of the activated Executable Entity.
+RTE,"The RTE shall support the synchronization of runnable entities. Synchronization means that the mechanisms that implement the runnable entity activation (OsAlarm, OsTask, OsEvent, etc.) are triggered (expired, activated, set, etc.) at the same point of time. Synchronization shall be possible even if runnable entities are mapped to different OsTasks, different OsPartitions, different cores, or even different ECUs."
+RTE,"If Com supports the sending/receiving of an array of uint8 natively, the RTE shall use this native interface if the communicated datatype is supported by Com."
+RTE,"In a system, N:M communication shall be allowed when this communication is subject to a variation point. After all affecting variants have been resolved, only 1:N or N:1 communication shall be possible. This shall be available for PostBuildLoadable variants."
+RTE,"RTE shall support selection of a signal provider at ""Post Build Loadable"" time."
+RTE,"The RTE shall support the configuration, post-build time, as a software component to run or not. When the SWC does not run, the RTE needs to behave as if the software component does not exist; therefore, all RTE events for that SWC's Runnable Entities shall be suppressed."
+RTE,The RTE generator shall be able to generate arrays whose size depends on a model attribute.
+RTE,"The RTE shall support the generation of the Application Software Component header file where ""PreCompileTime"" or ""PostBuildLoadable"" variability is left open and shall be resolved later."
+RTE,The RTE shall support the resolution and implementation of the AUTOSAR Variant Handling mechanism.
+RTE,"The RTE shall support the RTE-Status ""never received"". This is the new initial status of each data element for which it is configured. This initial status will be cleared when the first reception occurs."
+RTE,"In case of Sender-Receiver communication with ""last is best"" semantics, if the configuration requires, the RTE shall support an update flag that indicates whether there has been an update of the data since the last read operation from the Software Component to the data element. The update flag shall be set during reception of the data by the RTE and reset during the read operation from the software component."
+RTE,The RTE shall protect the data defined in NvBlockComponentType against concurrent write and read access (by SWCs or NVRAM Manager).
+RTE,The RTE shall support the access to fixed and constant data shareable between SWCs.
+RTE,"The document ""Specification of Platform Types"" shall be supported by RTE implementations."
+RTE,"The document ""Specification of Compiler Abstraction"" shall be supported by RTE implementations."
+RTE,"The document ""Specification of Memory Mapping"" shall be supported by RTE implementations."
+RTE,The RTE Generator may provide a vendor operating mode allowing vendor-specific optimizations.
+RTE,"The RTE Generator shall provide a compatibility operating mode that guarantees compatibility between different RTE implementations, both for source code and object code components."
+RTE,"The RTE API shall support wait points at which Runnable Entities will block until an 'RTE Event' occurs. A category 2 Runnable Entity shall, through the RTE API, be able to suspend its execution (i.e. block) until a well-defined event occurs. This requirement does not mean that 'wait points' shall be explicitly specified in the API and could be satisfied by blocking calls that suspend the caller until an event (defined in the VFB meta-model) occurs."
+RTE,"The RTE shall provide a mechanism for making requests for explicit reception of AUTOSAR signals (i.e. an implementation of Data Receive Point). The Data Receive Point of a Runnable Entity references an instance of a data-element in a required port. Using the Data Receive Point, a Runnable Entity can use an explicit RTE API call to receive new values of the specified data-element (e.g. the 'next' value is read out of the local queue)."
+RTE,The RTE shall provide a mechanism for the implicit reception of data elements. The mechanism shall grant read-access to a data element of a required port that will not be modified by the RTE and may be freely read until the Runnable Entity returns. The presence of Data Read Access means that the Runnable Entity will require access to the Data Element in the rPort. The Runnable Entity expects that the contents of this data do not change during execution of the Runnable Entity.
+RTE,"The RTE shall provide a mechanism for the implicit sending of data elements. The mechanism shall grant write-access to a data element of a provided port that may be freely changed until the Runnable Entity returns. The presence of Data Write Access means that the Runnable Entity will potentially modify the Data Element in the pPort. The Runnable Entity has free access to the data-element while it is running but the Runnable Entity should ensure that the data-element is in a consistent state when it returns. When using Data Write Access the new values of the data-element are made available, by the RTE, when the Runnable Entity returns. Depending on the configuration the RTE may either have nothing to do or it may need to actually initiate sending of the data element."
+RTE,"The RTE shall provide a mechanism for making requests for explicit sending of AUTOSAR signals (i.e. an implementation of Data Send Point). The Data Send Point of a Runnable Entity references an instance of a data-element in a provided port. Using the Data Send Point, a Runnable Entity can use an explicit RTE API call to write new values of the specified data-element (which may cause an immediate send depending on component and communication configuration)."
+RTE,The RTE shall support that ports are connected which are typed by different interfaces and where the elements of the provided port are typed by composite data types whose composite elements are mapped to elements of the required port. Hereby the required port might contain only a subset of the elements contained in the provided port.
+RTE,The RTE shall support the transfer of data with variable size (could be bigger than 8 bytes but has a fixed maximum size). The variable length support shall be applicable to strings and primitive byte arrays.
+RTE,The RTE generators shall configure the RTE to implement the specified communication paths while retaining their semantics.
+RTE,The RTE generators should provide optimized communication when the source code of an Application Software Component is available. Optimizations envisaged include elimination of the RTE for that communication channel.
+RTE,"The RTE shall support AUTOSAR software components where only the object code (""binary-code software components"") is available."
+RTE,"The RTE shall support AUTOSAR software components where the source is available (""source-code software components"")."
+RTE,The RTE generators shall provide a configuration option specifying the overall design goal of the generated RTE: minimizing memory and/or run-time overhead.
+RTE,The RTE generators shall accept input consisting of zero or more databases/files.
+RTE,The RTE specifications shall define a standard naming convention for all RTE API artifacts visible by a component author that are created by the RTE generator. The names of RTE API artifacts shall not include the component instance names.
+RTE,The RTE generators shall support SW-Components and BSW Modules created using ISO C++.
+RTE,The RTE generators shall support SW-Components and BSW Modules created using 'ANSI C'.
+RTE,The RTE generators shall encapsulate a BSW Module's local namespace for declarations and definitions for APIs and types related to that one BSW Module.
+RTE,The RTE generators shall encapsulate a Software Component's local namespace for declarations and definitions for APIs and types related to one Software Component.
+RTE,The RTE shall suppress the re-declaration of AUTOSAR data types mapped to the AUTOSAR Standard Types and shall use directly the AUTOSAR Standard Types instead.
+RTE,"The RTE generators shall suppress the re-definition of compatible type declarations resulting in identical ""C"" type definition."
+RTE,The RTE shall define standard naming conventions for all the type symbols created by the RTE generator that are visible within the global namespace. The naming conventions shall be defined in a way that each type requiring its own implementation within the global namespace is named uniquely.
+RTE,The RTE specifications shall define standard naming conventions for all the symbols created by the RTE generator that are visible within the global namespace. This naming convention is the exclusive right of the RTE generator for symbol definitions within the global namespace. Application and/or basic software components shall not create symbols using this same naming convention within the global namespace. This prevents naming conflicts and ensures clarity about which symbols belong to the RTE.
+RTE,"The RTE generators shall detect, and reject where appropriate, the invalid deployment and communication configuration of application and basic software components. This ensures that only well-defined configurations are used, preventing potential errors and malfunctions in the system."
+RTE,RTE shall use the well-defined mechanisms of AUTOSAR interfaces for the communication of active modes from the mode manager to the mode-dependent software component.
+RTE,"External and internal trigger event communications shall support queuing the number of triggers issued by a trigger source. When the trigger source is informed of the end of execution of all triggered executable entities, the RTE shall (if any trigger is in the queue) dequeue a trigger by activating again the triggered executable entities."
+RTE,The RTE shall support Inter-Runnable Triggering. A software component instance shall be able to explicitly trigger the execution of Runnable Entities of the same component instance.
+RTE,"The RTE shall support the communication of External Trigger events from one trigger source to multiple trigger sinks (""1:n""). The Runnable Entity(s) in the trigger sink(s) linked to the event shall be executed after the occurrence of the event in a defined and deterministic order defined by the integrator. Restriction: This is only applicable for intra-ECU usage."
+RTE,"The RTE shall support the queuing of concurrent calls to a server (by different clients). A server specified using the ""BUFFERINGqueue(n)"" attribute may have queued requests from multiple clients. Requests shall be read from the server’s queue using first-in-first-out semantics. Depending on the RTE implementation, the queue may be present in either the RTE or in COM."
+RTE,"The RTE shall support at most one asynchronous call at a time from a single operation in a required port categorized by a client-server interface (i.e. there can only be one outstanding request per ""AsynchronousServerCallPoint""). Note that a single client can simultaneously have multiple outstanding requests provided each is to a different server operation. When a software component instance restarts, it may receive a stale reply - replies to a request made before the component was restarted. The RTE shall forward stale replies and it is the job of the software component instance to detect and reject the reply, for example, through sequence numbers."
+Mode Management,"Users, indicating the operational needs of individual software components, shall be pre compile time configurable attributes of the ECU State Manager. Requests from unknown sources are ignored"
+Mode Management,"It shall be possible to configure in pre-compile time which wake-up sources are relevant in which sleep mode, provided that they can be actually assigned to a sleep mode (i.e., they will be enabled when the ECU enters that particular sleep mode)."
+Mode Management,"After OS shutdown, additional shutdown activities shall be taken like preparing hardware for the next wake-up. Finally, the ECU has to be switched off or put into a sleep mode. This shall be the task of the ECUStateManager."
+Mode Management,Several shutdown targets shall be supported.
+Mode Management,The ECU State Manager shall provide a service for the selection of the shutdown target.
+Mode Management,The ECU State Manager shall provide a service for the retrieval of the current shutdown target.
+Mode Management,Several sleep modes shall be available.
+Mode Management,An API for selecting the sleep modes shall be provided.
+Mode Management,The ECU State Manager shall provide a service for the retrieval of the last sleep targets.
+Mode Management,ECU shutdown shall be forced.
+Mode Management,The ECU State Manager shall provide an API to query the current ECU state.
+Mode Management,The ECU State Manager shall be the receiver of all wakeup events.
+Mode Management,The ECU State Manager shall be able to store the current wake-up reason.
+Mode Management,The ECU State Manager module shall start a timeout after receiving a wake-up indication.
+Mode Management,An API for querying the wake-up reason shall be provided.
+Mode Management,The ECU State Manager shall provide a service for the retrieval of the selected reset modality.
+Mode Management,An API to query the reset reason shall be provided.
+Mode Management,The ECU State Manager shall provide a service allowing the selection of the boot target.
+Mode Management,The ECU State Manager shall provide a service for querying the time of previous resets
+Mode Management,The ECU State Manager shall de-initialize Basic Software modules where appropriate during the shutdown process.
+Mode Management,The ECU State Manager shall provide services to request and release the RUN state.
+Mode Management,Configuration of initialization process of Basic Software modules shall be available.
+Mode Management,Configuration of de-initialization process of Basic Software modules shall be provided.
+Mode Management,Configuration of time-triggered increased in operation shall be provided.
+Mode Management,The number and names of main states and the transitions between main states shall be standardized.
+Mode Management,A Run State shall have a minimum duration.
+Mode Management,Starting/invoking the shutdown process shall be provided.
+Mode Management,Initialization of Basic Software modules shall be done.
+Mode Management,"The ECU State Manager shall provide the ability to execute external, statically-configured code at each transition between ECU states."
+Mode Management,The ECU State Manager shall provide a mechanism to enter a step-by-step decreasing power mode.
+Mode Management,The ECU State Manager shall include a mechanism to evaluate the condition to stay in the RUN state.
+Mode Management,Shutdown synchronization for SW-Components shall be supported.
+Mode Management,The ECU State Manager shall provide services to request and release the POST-RUN state.
+Mode Management,The ECU State Manager shall evaluate the condition to stay in the POST-RUN state.
+Mode Management,Wake-sleep operation shall be supported
+Mode Management,The EcuM shall handle the initialization of Basic Software modules
+Mode Management,The ECU State Manager shall offer two targets for shutting down the ECU
+Mode Management,A persistent Alarm Clock used by local SW-Cs shall be provided.
+Mode Management,Alarm Clock shall be active while the ECU is powered.
+Mode Management,"In case of wakeup, all the Alarm Clocks shall be canceled."
+Mode Management,"In case of startup, all the Alarm Clocks shall be canceled."
+Mode Management,Consecutive requests shall honor the earliest expiring alarm only.
+Mode Management,The alarm clock service shall allow setting an alarm relative to the current time using a time resolution of seconds.
+Mode Management,The alarm clock service shall allow setting an alarm absolute by using an absolute time with a resolution of seconds.
+Mode Management,The alarm clock service shall allow setting the clock.
+Mode Management,The ECU State Manager shall provide an alarm clock service which shall allow the retrieval of clock values.
+Mode Management,There shall be one instance of the function EcuM_Init that distinguishes between the different cores.
+Mode Management,RTE_Start shall be called on each core.
+Mode Management,State changes shall be ECU global.
+Mode Management,"To shutdown, ShutdownAllCores shall be called on the master core after synchronizing all cores."
+Mode Management,Validation and handling of wakeup events shall be done locally.
+Mode Management,The Watchdog Manager shall provide an initialization service.
+Mode Management,It shall be possible to prohibit the disabling of the watchdog.
+Mode Management,The Watchdog Manager shall cyclically check the periodicity of the supervised entities.
+Mode Management,The Watchdog Manager shall check the correct sequence of code execution in supervised entities.
+Mode Management,The Watchdog Manager shall provide a service allowing the update of temporal program flow monitoring.
+Mode Management,The Watchdog Manager shall provide a service allowing the update of logical program flow monitoring.
+Mode Management,The Watchdog Manager shall provide the indication of failed temporal monitoring.
+Mode Management,The Watchdog Manager shall provide the indication of failed logical monitoring.
+Mode Management,The Watchdog Manager shall reset the triggering condition in the Watchdog Driver in case of temporal failure.
+Mode Management,The Watchdog Manager shall reset the triggering condition in the Watchdog Driver in case of logical program flow violation.
+Mode Management,The Watchdog Manager shall be able to immediately reset the MCU.
+Mode Management,The Watchdog Manager shall be able to notify the software of an upcoming watchdog reset.
+Mode Management,It shall be possible to configure a delay before provoking a watchdog reset.
+Mode Management,The Watchdog Manager shall set the triggering condition during inactive monitoring.
+Mode Management,The Watchdog Manager shall periodically set the triggering condition in the Watchdog Driver as long as the monitoring has not failed.
+Mode Management,The Watchdog Manager shall provide a service interface to select a mode of operation for the Watchdog Manager.
+Mode Management,The Watchdog Manager shall support multiple watchdog instances.
+Mode Management,The Watchdog Manager shall support independent triggering condition values for each watchdog instance.
+Mode Management,The Watchdog Manager shall provide a service to cause a watchdog reset.
+Mode Management,The list of entities supervised by the Watchdog Manager shall be configurable at pre-compile time.
+Mode Management,It shall be possible to configure all the transition relations.
+Mode Management,The Watchdog Manager shall support post-build time and mode-dependent selectable configuration sets for the Watchdog Manager.
+Mode Management,The Watchdog Manager shall support post-build time and mode-dependent selectable configuration of transition relations.
+Mode Management,The Watchdog Manager shall report the failure of temporal or program flow monitoring to DEM.
+Mode Management,The Communication Manager shall coordinate multiple communication requests.
+Mode Management,The communication manager shall arbitrate and coordinate requests from users on physical channels and users on PNCs.
+Mode Management,"For each configured PNC, an independent state machine shall be instantiated."
+Mode Management,It shall be possible to distinguish between internal and external PNC activation requests.
+Mode Management,The Communication Manager shall initiate the wake-up and keep awake physical channels.
+Mode Management,Each physical channel shall be controlled by an independent communication mode.
+Mode Management,The Communication Manager shall provide an API allowing the collection of communication requests.
+Mode Management,The Communication Manager shall support two communication modes for each physical channel.
+Mode Management,The Communication Manager shall provide an API which allows applications to query the current communication mode.
+Mode Management,It shall be possible to evaluate the current communication mode.
+Mode Management,The Communication Manager shall provide an API for querying the requested communication mode.
+Mode Management,The Communication Manager shall provide an indication of communication mode changes.
+Mode Management,The Communication Manager shall support users that are connected to a physical channel.
+Mode Management,It shall be possible to limit communication modes independently for each physical channel.
+Mode Management,It shall be possible to revoke a communication mode limitation independently for each physical channel.
+Mode Management,The minimum duration of communication request after wakeup shall be configurable.
+Mode Management,The Communication Manager shall be able to prevent waking up physical channels.
+Mode Management,The Communication Manager shall provide a counter for inhibited communication requests.
+Mode Management,"An API shall be provided to retrieve the number of inhibited ""Full Communication"" mode requests."
+Mode Management,PNC activation requests shall be exchanged with the Network Management via a PNC bit vector.
+Mode Management,The Communication Manager shall support synchronous and asynchronous request upon an indicated wake-up
+Mode Management,The Communication Manager shall support a coordinated release of PNCs.
+Mode Management,PNC communication state shall be forwarded to the BswM.
+Mode Management,PNC Gateway Functionality shall consider systems with more than one gateways connected to the same network.
+Mode Management,ComM shall forward PNC-Clusters also to busses that are currently not awake.
+Mode Management,ComM API shall provide interfaces to access PNC Mapping.
+Mode Management,ComM shall forward the information for Partial Networking Learning.
+Mode Management,ComM API shall provide an interface to start PNCLearning mechanism for PNC Mapping.
+Mode Management,ComM shall set all its assigned PNCs when partial networking learning is requested.
+Mode Management,ComM API shall provide an interface to set PNC membership on Host ECU.
+Mode Management,ComM API shall provide an interface to configure PN filter mask.
+Mode Management,ComM shall send the information for Partial Networking Learning.
+Mode Management,ComM shall support communication channels that act as communication slaves with wake-up capability.
+Mode Management,ComM shall support communication channels which act as communication slaves without wake-up capability.
+Mode Management,ComM shall support the possibility to forward the information if the communication request is active or passive to its lower layer.
+Mode Management,The Communication Manager shall support synchronized PNC shutdown.
+Mode Management,Relationship between users and physical channels shall be configurable at precompile time.
+Mode Management,It shall be possible to assign physical channels to the Communication Manager.
+Mode Management,The Communication Manager shall be able to configure the physical channel wake-up prevention.
+Mode Management,"The Communication Manager shall be able to handle the Partial Networks on FlexRay, CAN, and Ethernet."
+Mode Management,The number of supported PNCs (likely Protocol Network Clusters) shall be configurable strictly at pre-compile time.
+Mode Management,Enabling or disabling the Partial Network Cluster man agement in ComM shall be post-build selectable.
+Mode Management,ComM shall allow for additional bus specific state managers
+Mode Management,The BSW Mode Manager shall support the ’disable nor mal Communication’
+Mode Management,The BSW Mode Manager shall provide an Interface to allow Mode Requests of SW-C’s
+Mode Management,The BSW Mode Manager shall provide an Interface to allow Mode Requests of BSW Modules
+Mode Management,The BSW Mode Manager shall evaluate the current mode requests.
+Mode Management,The BSW Mode Manager shall propagate a performed mode change to all local SW-Cs.
+Mode Management,"The mode manager shall be able to use a COM interface to activate, respectively deactivate, I-PDU groups."
+Mode Management,"The mode manager shall be able to make generic, configured callouts of void functions to other BSW modules."
+Mode Management,All actions shall only be performed on mode change.
+Mode Management,ComM shall notify BswM of any PNC communication state change.
+Mode Management,BswM shall be able to request communication modes for existing Comm Users.
+Mode Management,The BswM shall be able to set the halt mode for each single CPU Core independently.
+Mode Management,The rules of the mode arbitration shall be pre-compile and post-build configurable.
+Mode Management,The lists of mode transition specific actions shall be pre-compile and post-build configurable.
+Mode Management,A configurable set of mode-dependent enabled and concomitant disabled I-PDU groups shall be supported.
+Mode Management,Configurable sets of mode-dependent enabled I-PDU Groups shall be supported.
+Mode Management,Configurable Mode Activation-initiated Reset of Signals to Initial Values shall be supported.
+COM,AUTOSAR COM and LargeDataCOM shall be configured by using XML as configuration language
+COM,AUTOSAR COM and LargeDataCOM shall support multiple configuration stages
+COM,AUTOSAR COM and LargeDataCOM shall define rules for checking the consistency of configuration data
+COM,AUTOSAR COM and LargeDataCOM shall provide a receive indication function
+COM,AUTOSAR COM and LargeDataCOM shall provide a transmit confirmation function
+COM,AUTOSAR COM and LargeDataCOM shall provide a function to request the transmit buffer data for lower layer triggered transmission
+COM,AUTOSAR COM and LargeDataCOM shall not support splitting of large signals into different I-PDUs
+COM,AUTOSAR COM and LargeDataCOM shall only support dynamic length signals of type UINT8[n].
+COM,AUTOSAR COM and LargeDataCOM shall use the TP to fragment and reassemble large signals
+COM,AUTOSAR COM and LargeDataCOM shall support dynamical signals with a static maximum length
+COM,AUTOSAR COM module shall be based on the functionality and APIs of [DOC_ISO_COM]
+COM,The AUTOSAR COM module shall support endianness conversion
+COM,The AUTOSAR COM module shall support sign extension
+COM,The AUTOSAR COM module shall fill unused areas/ bits within an I-PDU with a configurable value
+COM,The AUTOSAR COM module shall support multiple transmission modes
+COM,The AUTOSAR COM module shall support defining two different transmission modes for each I-PDU
+COM,The AUTOSAR COM module shall support a configurable signal data based selection mechanism of the two transmission modes
+COM,AUTOSAR COM shall support signal data based transmission modes for configured serialized data
+COM,The AUTOSAR COM module shall cancel outstanding repetitions in case of a new send request
+COM,The AUTOSAR COM module shall support immediate and deferred signal based notification to the RTE
+COM,The AUTOSAR COM module shall provide two configurable options to handle signal timeouts
+COM,The AUTOSAR COM module shall support invalidation of signals at sender side
+COM,The AUTOSAR COM module shall support an optional notification when receiving invalidated data
+COM,The AUTOSAR COM module shall support an optional substitution of received invalidated data
+COM,The AUTOSAR COM module shall support substituting the last received value by the init value in case of a signal timeout
+COM,The AUTOSAR COM module shall define a data structure allowing efficiently starting and stopping of I-PDU groups
+COM,The AUTOSAR COM module shall support starting and stopping multiple I-PDU groups during runtime
+COM,The AUTOSAR COM module shall support enabling and disabling reception deadline monitoring of I-PDU groups
+COM,The AUTOSAR module shall handle complex data types as a consistent set of data
+COM,AUTOSAR COM shall provide a uint8-array based API for signal groups
+COM,The AUTOSAR COM module shall cancel transmission requests in case of expired transmissions
+COM,The AUTOSAR COM module shall support at most one dynamic length signal per I-PDU
+COM,Dynamic length signal must be placed last in I-PDU
+COM,The AUTOSAR COM module shall not support fragmentation towards the RTE
+COM,The AUTOSAR COM module shall distinct normal and large signals via its configuration
+COM,The AUTOSAR COM module shall support to detect if a received signal or signal group was updated by the sender
+COM,The AUTOSAR COM module shall support deadline monitoring for updated signals/signal groups on receiver side
+COM,The AUTOSAR COM module shall provide a mechanism to detect out of sequence received I-PDUs
+COM,The AUTOSAR COM module shall support configuring the properties of the I-PDU Counter
+COM,The AUTOSAR COM module shall support the incrementing and checking of the I-PDU Counter
+COM,The AUTOSAR COM module shall support the detection of out of sequence I-PDUs
+COM,The AUTOSAR COM module shall provide a mechanism to detect corrupted received I-PDUs and to recover from this failure mode
+COM,The AUTOSAR COM module shall support the configuration of I-PDU replication mechanism
+COM,The AUTOSAR COM module shall support transmission and reception of replicated I-PDUs
+COM,The AUTOSAR COM module shall support the detection of failures when receiving replicated I-PDUs
+COM,Support of Large Data COM
+COM,Large Data COM shall support Transport Protocol-like communication
+COM,Large Data COM shall support Interface-like communication
+COM,Large Data COM shall support Transmission Triggered by lower layer
+Crypto,Some crypto services shall allow synchronous job processing.
+Crypto,Some crypto services shall allow asynchronous job processing.
+Crypto,The crypto stack shall be able to incorporate modules of a crypto library.
+Crypto,The Crypto Stack shall provide scalability for the cryptographic features
+Crypto,The Crypto Stack shall allow static configuration of keys used for cryptographic jobs
+Crypto,The Crypto Stack shall only allow unique key identifiers
+Crypto,The modules of the crypto stack shall support only pre-compile time configuration
+Crypto,The configuration files of the crypto stack modules shall be readable for human beings
+Crypto,The Crypto Stack shall support reentrancy for all crypto services
+Crypto,The Crypto Stack shall conceal symmetric keys from the users of crypto services
+Crypto,The Crypto Stack shall conceal asymmetric private keys from the users of Crypto services
+Crypto,The Crypto Stack shall identify random number generation as a cryptographic primitive which can be requested to a driver
+Crypto,The Crypto Stack shall identify symmetric encryption/decryption as a cryptographic primitive which can be requested to a driver
+Crypto,The Crypto Stack shall identify asymmetric encryption/decryption as a cryptographic primitive which can be requested to a driver
+Crypto,The Crypto Stack shall provide an interface for the derivation of symmetric keys
+Crypto,The Crypto Stack shall provide an interface for key exchange mechanisms
+Crypto,The Crypto Stack shall provide an interface for key wrapping/extraction mechanisms
+Crypto,The Crypto Stack shall provide an interface for parsing certificates
+Crypto,The Crypto Stack shall support detection of invalid keys
+Crypto,Key manager operation shall either run synchronously or asynchronously.
+Crypto,Key manager shall provide interfaces to generate or update key material.
+Crypto,Key manager shall be able to negotiate a shared secret by exchanging messages with other ECUs
+Crypto,Key manager shall be able to manage derivation of key material from a common secret
+Crypto,The KeyM module shall support on-board generated keys
+Crypto,The KeyM module shall support verification of certificates based on configured rules
+Crypto,The KeyM module shall support retrieving arbitrary elements of a certificate
+Crypto,AUTOSAR certificate handler shall support the certificate formats CVC and X.509.
+Crypto,Keys in the crypto stack can be uniquely identified
+Crypto,Crypto driver shall place keys into specific key slots
+Crypto,KeyM shall be highly configurable to support different OEM use cases
+Crypto,Keys shall use a default value if configured
+Crypto,Keys shall not be used if they are empty or corrupted
+Crypto,Key material shall be securely stored either in NVM or CSM
+Crypto,The KeyM shall provide interfaces for providing a proof for correctly programmed keys. A verification function can be used to provide a proof to the key server if the correct key is programmed and associated with a specific job.
+Crypto,Keys may be temporarily stored in RAM. A shutdown operation may cleanup these keys by removing the key data from RAM. 
+Crypto,The KeyM shall use the interfaces provided by the security event memory for secure logging of security related events which are produced by KeyM.
+Crypto,Each primitive of the CRYIF shall belong to exactly one service of the CSM
+Crypto,The job processing mode (synchronous or asynchronous) of a CSM service shall be defined by static configuration
+Crypto,The priority of a user and its crypto jobs shall be defined by static configuration
+Crypto,The set of cryptographic services provided by the CSM shall be defined by static configuration
+Crypto,The CSM module specification shall specify which other modules are required
+Crypto,"The CSM module specification shall specify the interface and behavior of the callback function, if the asynchronous job processing mode is selected"
+Crypto,The CSM module shall use the streaming approach for some selected services
+Crypto,The CSM module shall distinguish between error types
+Crypto,The CSM module shall report detected development errors to the Default Error Tracer
+Crypto,The CSM module shall not return specific development error codes via the API
+Crypto,The CSM shall check passed API parameters for validity
+Crypto,The Crypto Interface shall have an interface to the static configuration information of the Crypto Driver
+Crypto,Channels mapped to different Crypto Driver Objects shall be uniquely configurable in Crypto Interface
+Crypto,The Crypto Interface shall report detected development errors to the Default Error Tracer
+Crypto,The Crypto Driver shall allow static configuration of Crypto Driver Objects
+Crypto,Crypto Interface keys mapped to different Crypto Driver Keys shall be uniquely configurable in the Crypto Interface
+Crypto,The Crypto Driver shall provide access to all cryptographic algorithms supported by the hardware
+Crypto,The security event memory (SEM) shall enable to log security events (SE) which are monitored by BSW modules or SWCs. It shall be possible to store the type of the security event along with data which is useful for forensic analysis. 
+Crypto,Depending on the type of security event the number of storable snap shots and the properties of the snap shots shall be configurable. 
+Memory,The MemAcc module shall allow the configuration of the non-contiguous physical memory areas of different memory devices to a logical address area.
+Memory,The MemAcc module shall allow the configuration of the priority for different logical address areas.
+Memory,The MemAcc module shall support variant mapping.
+Memory,The Mem driver shall be statically configurable.
+Memory,The FEE and EA modules shall allow the configuration of the alignment of the start and end addresses of logical blocks.
+Memory,The FEE and EA modules shall allow the configuration of a required number of write cycles for each logical block.
+Memory,The block numbers 0x0000 and 0xFFFF shall not be used.
+Memory,The MemAcc module and Mem driver shall provide an interface for initialization.
+Memory,The MemAcc module and Mem driver shall provide asynchronous memory access functions.
+Memory,The MemAcc module and Mem driver shall support optional services.
+Memory,The MemAcc module and Mem driver shall provide asynchronous status function.
+Memory,The MemAcc module shall provide a job notification mechanism for the upper layer modules.
+Memory,The MemAcc module shall support multiple Mem drivers for different types of memory.
+Memory,The Mem driver shall support multiple instances of the same memory device.
+Memory,The MemAcc module shall manage the memory job requests from different upper layer modules.
+Memory,The MemAcc module and Mem driver shall provide measures for dynamic driver activation.
+Memory,The MemAcc module and Mem driver shall provide support for 64-bit address range.
+Memory,The MemAcc module shall provide optional support for the initialization and main function triggering of memory drivers.
+Memory,Memory drivers shall operate on physical segmentation/physical addresses.
+Memory,Memory drivers shall use a standard binary format for dynamic driver activation.
+Memory,Memory drivers shall handle only one job at one time.
+Memory,Memory drivers shall not buffer data.
+Memory,The Mem driver shall support multi-core type II requirements.
+Memory,Memory drivers shall provide a function to handle system ECC errors and propagate them.
+Memory,MemAcc module shall provide a function to retrieve memory segmentation information.
+Memory,MemAcc module shall provide a lock function to enable/disable the direct memory access from application.
+Memory,MemAcc module and Mem driver shall provide a generic function to access the hardware-specific functionalities.
+Memory,The FEE and EA modules shall provide upper layer modules with a virtual 32-bit address space.
+Memory,The start address for a block erase or write operation shall always be aligned to the virtual 64K boundary.
+Memory,The start address and length for reading a block shall not be limited to a certain alignment.
+Memory,The FEE and EA modules shall provide a conversion between the logical linear addresses and the physical memory addresses.
+Memory,The FEE and EA modules shall provide a write service that operates only on complete configured logical blocks.
+Memory,The FEE and EA modules shall provide a read service that allows reading all or part of a logical block.
+Memory,The FEE and EA modules shall provide a service that allows canceling an ongoing asynchronous operation.
+Memory,The FEE and EA modules shall provide a service to invalidate a logical block.
+Memory,"If the configured number of write cycles for a logical block exceeds the number provided by the underlying physical device, the FEE or EA module has to provide sufficient mechanisms to spread the write requests for that logical block over a bigger memory area."
+Memory,Writing of immediate data shall not be delayed by internal management operations nor by erasing the memory area to be written to.
+Memory,The FEE and EA modules shall provide an erase service that operates only on complete logical blocks containing immediate data.
+Memory,The FEE and EA modules shall detect possible data inconsistencies due to aborted/interrupted write operations.
+Memory,The FEE and EA modules shall report possible data inconsistencies.
+Memory,The FEE and EA modules shall not return inconsistent data to the caller.
+Memory,The Memory Abstraction Interface shall provide uniform access to the API services of the underlying memory abstraction modules.
+Memory,The Memory Abstraction Interface shall allow the selection of an underlying memory abstraction module by using a device index
+Memory,The Memory Abstraction Interface shall allow the pre compile time configuration of the number of underlying memory abstraction modules
+Memory,The Memory Abstraction Interface shall preserve the functionality of the underlying memory abstraction module
+Memory, The Memory Abstraction Interface shall only check those parameters that are used within the interface itself
+Memory, Each application shall be enabled to declare the memory requirements at configuration time
+Memory,The NVRAM manager shall support two classes of RAM data blocks.
+Memory,The NVRAM manager shall allow the configuration of native block management types.
+Memory,The NVRAM manager shall allow the configuration of dataset block management type.
+Memory,The priority of each NVRAM block shall be statically configurable in different levels.
+Memory,The NVRAM Manager shall allow a static configuration of a default write protection (on/off) for each NVRAM block.
+Memory,The NVRAM manager shall have a unique configuration identifier.
+Memory,The NVRAM manager shall provide functionality to automatically initialize RAM data blocks after a software update.
+Memory,"For each block, a notification shall be configurable."
+Memory,The NVRAM manager shall be able to access multiple non-volatile memory devices.
+Memory,The NVRAM manager shall have a configurable consistency check for each block.
+Memory,The maximum number of retries in case of an error shall be separately configurable.
+Memory,The NVRAM manager shall provide a configurable verification of the unique block identifier.
+Memory,The NVRAM manager shall provide a configurable write verification of data.
+Memory,It shall be statically configurable which blocks are loaded automatically during startup of the NVRAM manager.
+Memory,It shall be possible to protect permanent RAM data blocks against data loss due to reset.
+Memory,Each NVRAM block shall be configurable for shared access.
+Memory,The NVRAM manager shall provide a service to check and load those NVRAM blocks configured to have a permanent RAM data block to RAM.
+Memory,The NVRAM manager shall provide an implicit way of accessing blocks in the NVRAM and in the shared memory (RAM).
+Memory,The NVRAM manager shall allow non-continuous RAM block allocation in the global RAM area.
+Memory,"The NVRAM manager shall provide a mechanism to handle multiple, concurrent read/write requests."
+Memory,The NVRAM manager shall provide functionality to read out data associated with an NVRAM block from the non-volatile memory.
+Memory,The NVRAM manager shall provide functionality to store data associated with an NVRAM block in the non-volatile memory.
+Memory,The NVRAM manager shall retry read and write operations on NVRAM blocks if they have not succeeded up to a configurable number of times.
+Memory,The NVRAM manager shall guarantee that an accepted write request will be processed.
+Memory,The NVRAM manager shall provide functionality to restore an NVRAM block’s associated data from ROM defaults.
+Memory,The NVRAM Manager shall request default data from the application.
+Memory,The NVRAM Manager shall be able to distinguish between explicitly invalidated and inconsistent data.
+Memory,The NVRAM Manager shall provide a service for marking permanent RAM data blocks as modified/unmodified.
+Memory,The NVRAM Manager shall provide a service for marking the permanent RAM data block of an NVRAM block valid.
+Memory,The NVRAM manager shall provide a service to invalidate a block of data in the non-volatile memory.
+Memory,The NVRAM manager shall retry read and write operations on NVRAM blocks if they have not succeeded up to a configurable number of times.
+Memory,The NVRAM manager shall guarantee that an accepted write request will be processed.
+Memory,The NVRAM manager shall provide functionality to restore an NVRAM block’s associated data from ROM defaults.
+Memory,The NVRAM Manager shall request default data from the application.
+Memory,The NVRAM Manager shall be able to distinguish between explicitly invalidated and inconsistent data.
+Memory,The NVRAM Manager shall provide a service for marking permanent RAM data blocks as modified/unmodified.
+Memory,The NVRAM Manager shall provide a service for marking the permanent RAM data block of an NVRAM block valid.
+Memory,The NVRAM manager shall provide a service to invalidate a block of data in the non-volatile memory.
+Memory,The NVRAM manager shall provide a service to erase the NV block(s) associated with an NVRAM block.
+Memory,The NVRAM manager shall provide a service for the selection of valid dataset NV blocks.
+Memory,The NVRAM manager shall provide prioritization for job processing order.
+Memory,The NVRAM manager shall provide functionality to read out the status of read/write operations.
+Memory,The NVRAM manager shall implement mechanisms for consistency/integrity checks of data saved in NVRAM.
+Memory,The NVRAM manager shall provide mechanisms for static verification of the block identifier when reading an NVRAM block
+Memory,The NVRAM manager shall provide a mechanism for verifica tion of the written block data by again reading and comparing it
+Memory,Write accesses of the NVRAM manager to persistent memory shall be executed quasi-parallel to normal operation of the ECU.
+Memory,The NVRAM manager shall provide a mechanism to remove all unprocessed requests associated with an NVRAM block.
+Memory,The NVRAM manager shall provide functionality for determining updates of data associated with an NVRAM Block during runtime.
+Memory,The NVRAM manager shall provide a function which triggers first or re-initialization of selected blocks both in RAM and on NV memory.
+Memory,Larger blocks with delta update only on the changed fragments shall be supported.
+Memory,The NVRAM manager shall provide a function which triggers update of integrity information and saving of RAM data blocks to NV memory.
+Memory,The NVRAM manager shall provide a function for aborting the shutdown process.
+Memory,The NVRAM manager shall provide a service for auto-validating NVRAM blocks.
+Memory,Treatable errors shall not affect other software components.
+Memory,The NVRAM manager shall repair data in blocks of management type 'NVRAM redundant'.
+Memory,The NVRAM manager shall copy the ROM default data to the data area of the corresponding RAM block if it cannot read data from NV into RAM.
+Memory,Some of the NV Blocks in the NVRAM shall never be erased nor replaced with the default ROM data after first initialization.
+Memory,Flash driver shall be statically configurable.
+Memory,Flash memory properties shall be published.
+Memory,The flash driver shall provide an asynchronous read function.
+Memory,The flash driver shall provide an asynchronous write function.
+Memory,The flash driver shall provide an asynchronous erase function.
+Memory,The flash driver shall provide an asynchronous compare function.
+Memory,The flash driver shall provide a synchronous cancel function.
+Memory,The flash driver shall provide a synchronous status function.
+Memory,The flash driver shall provide a synchronous selection function.
+Memory,The write and erase functions of the Flash driver shall check the passed address parameters.
+Memory,"Before writing, the flash driver shall verify if the addressed memory area has been erased."
+Memory,The flash driver shall verify written data.
+Memory,"After execution of an erase job, the flash driver shall verify that the addressed block has been erased completely."
+Memory,The flash driver shall handle only one job at one time.
+Memory,The flash driver shall provide a function that has to be called for job processing.
+Memory,"In normal mode, one cycle of the job processing function of the flash driver shall limit the block size to the default block size."
+Memory,"In fast mode, one cycle of the job processing function of the flash driver shall limit the block size to the maximum block size."
+Memory,The flash driver shall load the code that accesses the flash hardware to RAM whenever an erase or write job is started.
+Memory,The flash driver shall execute the code that accesses the flash hardware from RAM.
+Memory,The flash driver shall remove the code that accesses the flash hardware from RAM after the current job has been finished or canceled.
+Memory,The same requirements shall apply for an external and internal flash driver.
+Memory,The external flash driver shall allow the static configuration of the hardware flash ID and the suspend time
+Memory,The external flash driver shall check if the configured flash type matches with the hardware flash ID
+Libraries,The functional behavior of each library functions shall not be configurable
+Libraries,It shall be possible to configure the microcontroller so that the library code is shared between all callers
+Libraries,A library shall be operational before all BSW modules and application SW-Cs
+Libraries,Using libraries shall not pass through a port interface
+Libraries,Each library shall provide one header file with its public interface
+Libraries,"All library functions shall be re-entrant, which means that they shall be able to handle several simultaneous, interleaved or/and concurrent requests."
+Libraries,A library shall define its own specific types in the library header file if and only if they are not yet defined by AUTOSAR
+Libraries,"All function names and type names shall start with ""Library short name_"""
+Libraries,Passing parameters with structure shall be allowed
+Libraries,A library shall be operational until the shutdown
+Libraries,"The error cases, resulting in the check at runtime of the value of input parameters, shall be listed in SWS"
+Libraries,The CRC library shall support the standard generator polynomials
+IO,The IO Hardware Abstraction modules shall provide values within one static range for each Signal.
+IO,The IO Hardware Abstraction modules shall provide a service to read an input voltage with specific attributes.
+IO,The IO Hardware Abstraction modules shall provide a service to read an output voltage with specific attributes.
+IO,The IO Hardware Abstraction modules shall provide a service to read an input current with specific attributes.
+IO,The IO Hardware Abstraction module shall provide a ser vice to measure a connected resistance using specific attributes
+IO,The IO Hardware Abstraction modules shall provide a service to get/read a discrete input with specific attributes.
+IO,The IO Hardware Abstraction modules shall offer a service to get/read simultaneously several discrete inputs.
+IO,The IO Hardware Abstraction modules shall provide a mechanism to report to the Signal Client when a discrete input changes.
+IO,The IO Hardware Abstraction modules shall provide a service to monitor hardware failure and to set a status.
+IO,The IO Hardware Abstraction modules shall provide a service to control a discrete powered output with specific attributes.
+IO,The IO Hardware Abstraction modules shall offer a service to update simultaneously several discrete outputs.
+IO,The IO Hardware Abstraction modules shall provide a service to measure the period time between two falling or rising edges on a Signal.
+IO,The IO Hardware Abstraction modules shall provide a service to control the ratio between the active level and the inactive level of a periodic output signal.
+IO,The IO Hardware Abstraction modules shall provide a service to measure the ratio between the active level and the inactive level of a periodic input signal.
+IO,The IO Hardware Abstraction shall provide synchronous signal access functions.
+IO,The I/O Hardware Abstraction shall provide an interface to the DCM that allows control and reading of the configured signals.
+IO,The IO Hardware Abstraction shall allow configuring a unique Symbolic Name statically for each Signal.
+IO,The IO Hardware Abstraction modules shall be independent of the physical level.
+IO,The IO Hardware Abstraction shall be able to handle more than one electrical signal simultaneously.
+IO,The IO Hardware Abstraction shall hide any communica tion over ECU internal onboard peripherals to access Signals
+IO,"The IO Hardware Abstraction shall detect a failure short circuit to the ground, according to the hardware capabilities"
+IO,"The IO Hardware Abstraction shall detect a failure short circuit to +UBat, according to the hardware capabilities."
+IO,"The IO Hardware Abstraction shall detect an open circuit, according to the hardware capabilities."
+IO,The IO Hardware Abstraction shall detect a failure overload.
+IO,The IO Hardware Abstraction shall detect an overtemperature.
+IO,The IO Hardware Abstraction module shall keep the ECU hardware safe
+IO,The IO Hardware Abstraction module shall not decide on its own to switch an output on again that has been switched off for hardware protection reasons
+IO,The IO Hardware Abstraction module shall offer an interface to trigger an output after an output has been cut off.
+IO,Encapsulation of power state preparation shall be available.
+IO,Encapsulation of power state setting shall be available.
+IO,Callback notification for each power state preparation completion shall be provided
